@@ -1,0 +1,6 @@
+{
+  "country_peers": {
+    "message": "Trenutno ste u prodavnici {{ country_name }}. Ako želite da pregledate prodavnicu iz:",
+    "countries": "Zemlje"
+  }
+}

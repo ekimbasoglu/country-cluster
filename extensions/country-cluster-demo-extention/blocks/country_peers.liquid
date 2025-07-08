@@ -1,0 +1,30 @@
+{%- comment -%}
+  Country-Peers block
+  Shows the visitor’s country plus three placeholder peer countries.
+{%- endcomment -%}
+
+<div class="country-peers" data-country="{{ localization.country.iso_code }}">
+  <p class="country-peers__message">
+    {{ 'country_peers.message' | t: country_name: localization.country.name }}
+  </p>
+
+  <p class="country-peers__subtitle">
+    {{ 'country_peers.countries' | t }}
+  </p>
+
+  <ul class="country-peers__list">
+    <li>Greece</li>
+    <li>Albania</li>
+    <li>Bulgaria</li>
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Country Peers",
+  "target": "section",
+  "enabled_on": {
+    "templates": ["index", "product", "collection", "page"]
+  }
+}
+{% endschema %}

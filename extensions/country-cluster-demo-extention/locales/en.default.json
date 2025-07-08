@@ -1,0 +1,6 @@
+{
+  "country_peers": {
+    "message": "You are at {{ country_name }} shop now. If you want to browse shop from:",
+    "countries": "Countries"
+  }
+}
