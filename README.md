@@ -1,78 +1,41 @@
-# Shopify App Template - Extension only
+# Country Cluster – Shopify Theme Extension
 
-This is a template for building an [extension-only Shopify app](https://shopify.dev/docs/apps/build/app-extensions/build-extension-only-app). It contains the basics for building a Shopify app that uses only app extensions.
+> Show shoppers a short list of **peer countries** (same continent) using a Cloudflare-edge lookup.
 
-This template doesn't include a server or the ability to embed a page in the Shopify Admin. If you want either of these capabilities, choose the [Remix app template](https://github.com/Shopify/shopify-app-template-remix) instead.
+_Worker repo:_ **<https://github.com/ekimbasoglu/geo-locale-worker>**
 
-Whether you choose to use this template or another one, you can use your preferred package manager and the Shopify CLI with [these steps](#installing-the-template).
+_Shopify Demo:_ **<https://country-cluster-demo.myshopify.com>** *password: test*
 
-## Benefits
+---
 
-Shopify apps are built on a variety of Shopify tools to create a great merchant experience. The [create an app](https://shopify.dev/docs/apps/getting-started/create) tutorial in our developer documentation will guide you through creating a Shopify app.
+## 📸 Demo
+<a id="demo"></a>
+![Screenshot 2025-07-08 at 16 06 27](https://github.com/user-attachments/assets/a3186194-f105-4b81-ac7b-17e87249d44d)
 
-This app template does little more than install the CLI and scaffold a repository.
+https://github.com/user-attachments/assets/5cf9731d-ee3a-4cd6-8b90-efd817662646
 
-## Getting started
 
-### Requirements
 
-1. You must [download and install Node.js](https://nodejs.org/en/download/) if you don't already have it.
-1. You must [create a Shopify partner account](https://partners.shopify.com/signup) if you don’t have one.
-1. You must create a store for testing if you don't have one, either a [development store](https://help.shopify.com/en/partners/dashboard/development-stores#create-a-development-store) or a [Shopify Plus sandbox store](https://help.shopify.com/en/partners/dashboard/managing-stores/plus-sandbox-store).
+---
 
-### Installing the template
+## 🔧 What’s inside
+| Folder | Purpose |
+|--------|---------|
+| **extensions/country-cluster/** | Theme-app extension (Liquid + JS + ~locales~) |
+| **shopify.app.toml** | App manifest – client ID only (no secrets) |
 
-This template can be installed using your preferred package manager:
+> The Cloudflare Worker that powers the API lives in a **separate repo** (linked above) to keep secrets and deployment history isolated.
 
-Using yarn:
+---
 
-```shell
-yarn create @shopify/app
-```
+## 🚀 Quick start
 
-Using npm:
+```bash
+git clone https://github.com/ekimbasoglu/country-cluster
+cd country-cluster
 
-```shell
-npm init @shopify/app@latest
-```
+# 1. Set up Shopify credentials
+cp .env.example .env          # fill in API secret, scopes, etc.
 
-Using pnpm:
-
-```shell
-pnpm create @shopify/app@latest
-```
-
-This will clone the template and install the required dependencies.
-
-#### Local Development
-
-[The Shopify CLI](https://shopify.dev/docs/apps/tools/cli) connects to an app in your Partners dashboard. It provides environment variables and runs commands in parallel.
-
-You can develop locally using your preferred package manager. Run one of the following commands from the root of your app.
-
-Using yarn:
-
-```shell
-yarn dev
-```
-
-Using npm:
-
-```shell
-npm run dev
-```
-
-Using pnpm:
-
-```shell
-pnpm run dev
-```
-
-Open the URL generated in your console. Once you grant permission to the app, you can start development (such as generating extensions).
-
-## Developer resources
-
-- [Introduction to Shopify apps](https://shopify.dev/docs/apps/getting-started)
-- [App extensions](https://shopify.dev/docs/apps/build/app-extensions)
-- [Extension only apps](https://shopify.dev/docs/apps/build/app-extensions/build-extension-only-app)
-- [Shopify CLI](https://shopify.dev/docs/apps/tools/cli)
+# 2. Run the app in a dev store
+shopify app dev --store <my-dev-store>.myshopify.com
