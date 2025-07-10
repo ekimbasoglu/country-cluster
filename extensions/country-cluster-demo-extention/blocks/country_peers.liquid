@@ -1,6 +1,6 @@
 {%- comment -%}
-  Country-Peers block
-  Shows the visitor’s country plus three placeholder peer countries.
+  Country-Cluster block
+  Country-Peers block – live list pulled via App-Proxy
 {%- endcomment -%}
 
 <div class="country-peers" data-country="{{ localization.country.iso_code }}">
@@ -11,17 +11,42 @@
   <p class="country-peers__subtitle">
     {{ 'country_peers.countries' | t }}
   </p>
-
-  <ul class="country-peers__list">
-    <li>Greece</li>
-    <li>Albania</li>
-    <li>Bulgaria</li>
+    
+  <ul class="country-peers__list" aria-live="polite">
+    <li>Loading…</li>
   </ul>
+
+  <script>
+  (function () {
+    const iso = "{{ localization.country.iso_code }}".toUpperCase();
+    const ul  = document.currentScript.parentElement.querySelector('.country-peers__list');
+
+    ul.innerHTML = '<li>Loading…</li>';
+
+    fetch('/apps/country-cluster', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ country: iso })
+    })
+    .then(r => r.ok ? r.json() : Promise.reject(r))
+    .then(({ countries = [] }) => {
+      const peers = countries
+        .filter(c => c.code !== iso) 
+        .slice(0, 3);                
+      ul.innerHTML = peers.length
+        ? peers.map(c => `<li>${c.name}</li>`).join('')
+        : '<li>(no matches)</li>';
+    })
+    .catch(() => {
+      ul.innerHTML = '<li>(service unavailable)</li>';
+    });
+  })();
+</script>
 </div>
 
 {% schema %}
 {
-  "name": "Country Peers",
+  "name": "Country Cluster",
   "target": "section",
   "enabled_on": {
     "templates": ["index", "product", "collection", "page"]

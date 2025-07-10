@@ -1,3 +1,5 @@
 name = "country-cluster-demo-extention"
 type = "theme"
 
+[capabilities]        
+network_access = true 
